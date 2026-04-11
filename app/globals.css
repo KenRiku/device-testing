@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #0f1117;
+    color: #e8eaf6;
+    font-family: var(--font-dm-sans), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-syne), sans-serif;
+    font-weight: 700;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1d27;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2a2d3a;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3d4a;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-cyan text-bg-primary font-semibold px-6 py-3 rounded-lg hover:bg-accent-cyan-dark transition-all duration-200 shadow-cyan-glow hover:shadow-cyan-glow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-border text-text-primary px-6 py-3 rounded-lg hover:border-accent-cyan hover:text-accent-cyan transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-text-secondary px-4 py-2 rounded-lg hover:text-text-primary hover:bg-bg-secondary transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-bg-secondary border border-border rounded-xl p-6 shadow-card;
+  }
+
+  .input-field {
+    @apply w-full bg-bg-tertiary border border-border text-text-primary placeholder-text-muted px-4 py-3 rounded-lg focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan/20 transition-all duration-200;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-secondary mb-2;
+  }
+
+  .badge-critical {
+    @apply inline-flex items-center gap-1 bg-status-error/10 border border-status-error/30 text-status-error px-2 py-0.5 rounded text-xs font-semibold;
+  }
+
+  .badge-major {
+    @apply inline-flex items-center gap-1 bg-status-warning/10 border border-status-warning/30 text-status-warning px-2 py-0.5 rounded text-xs font-semibold;
+  }
+
+  .badge-minor {
+    @apply inline-flex items-center gap-1 bg-status-info/10 border border-status-info/30 text-status-info px-2 py-0.5 rounded text-xs font-semibold;
+  }
+
+  .badge-info {
+    @apply inline-flex items-center gap-1 bg-text-muted/10 border border-text-muted/30 text-text-secondary px-2 py-0.5 rounded text-xs font-semibold;
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .nav-link {
+    @apply text-text-secondary hover:text-text-primary transition-colors duration-200 text-sm;
+  }
+
+  .nav-link-active {
+    @apply text-accent-cyan;
+  }
+
+  .monospace {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  }
+}
+
+/* Scan progress animation */
+@keyframes progress-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  }
+}
+
+.progress-bar-animated {
+  animation: progress-glow 2s ease-in-out infinite;
+}

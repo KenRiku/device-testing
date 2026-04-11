@@ -1,0 +1,66 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  password  String
+  projects  Project[]
+  createdAt DateTime  @default(now())
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  url       String
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  scans     Scan[]
+  createdAt DateTime @default(now())
+}
+
+model Scan {
+  id         String         @id @default(cuid())
+  projectId  String?
+  project    Project?       @relation(fields: [projectId], references: [id])
+  url        String
+  status     String         @default("pending")
+  issueCount Int            @default(0)
+  userId     String
+  results    DeviceResult[]
+  createdAt  DateTime       @default(now())
+}
+
+model DeviceResult {
+  id             String   @id @default(cuid())
+  scanId         String
+  scan           Scan     @relation(fields: [scanId], references: [id])
+  deviceName     String
+  viewportWidth  Int
+  viewportHeight Int
+  userAgent      String
+  marketShare    Float
+  screenshotPath String
+  issues         Issue[]
+  createdAt      DateTime @default(now())
+}
+
+model Issue {
+  id             String       @id @default(cuid())
+  deviceResultId String
+  deviceResult   DeviceResult @relation(fields: [deviceResultId], references: [id])
+  severity       String
+  category       String
+  description    String
+  boundingBox    String?
+  suggestion     String?
+  createdAt      DateTime     @default(now())
+}
